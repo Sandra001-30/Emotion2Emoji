@@ -10,7 +10,7 @@ cap = cv2.VideoCapture(0)
 
 while True:
     # Read a frame from the webcam
-    ret, frame = cap.read()
+    _, frame = cap.read()
 
     # Convert the frame to grayscale for face detection
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -25,9 +25,13 @@ while True:
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-            # Analyze the emotion using the entire frame
+            # Analyze the emotion using DeepFace
+            # 'actions' arg will make the model to detect a single feature(here emotions)
+            # 'enforce_detection' arg raise an exception when there is no face in detection, default True
             res = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=False)
-            emotion = res[0]['dominant_emotion']
+
+            # Getting the dominant emotion from a dictionary of available emotions
+            emotion = res[0]['dominant_emotion'] 
 
             # Display the emotion text on the frame
             cv2.putText(frame, f'Emotion: {emotion}', (x, y - 10), cv2.FONT_HERSHEY_DUPLEX, 0.9, (0, 255, 0), 2, cv2.LINE_AA)
@@ -51,7 +55,7 @@ while True:
     # Display the canvas and the frame together
     cv2.imshow('Emotion 2 Emoji', np.hstack((canvas, frame)))
 
-    # Break the loop if the 'ESC' key is pressed
+    # Exits the OpenCV window if the 'ESC' key is pressed
     if cv2.waitKey(33) & 0xFF == 27:
         break
 
