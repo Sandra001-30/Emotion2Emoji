@@ -39,6 +39,12 @@ Features:
 
 Drawbacks:
 
+* When head is tilted sideways the face detection won't work, I think this is a problem with Haarcascade Classifier.
+
 * Even though the system is very stable most of the time, the system randomly fails for unknown reasons.
 
-* The system works perfectly when there is a single face in detection, but fails to give the correct emotions when there are multiple faces. And the only positive side of this issue is that the system shows same number of emojis as per detection.
+* The system works perfectly when there is a single face in detection, but fails to give the correct emotions when there are multiple faces. Anyway the system show equal number of emojis as number of faces in detection.
+
+---
+
+See demo video [here](https://github.com/004Ajay/Emotion2Emoji/blob/main/Assets/Emotion2Emoji_Video.mp4)
